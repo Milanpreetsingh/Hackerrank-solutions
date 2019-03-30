@@ -1,0 +1,52 @@
+# Hackerrank-solutions#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the decentNumber function below.
+def decentNumber(n):
+    strg = ""
+    n1 = n
+    three = 0
+    if n < 3:
+        print(-1)
+        return
+    if n%3 == 0:
+        for i in range(n):
+            strg += "5"
+        print(int(strg))
+        return 
+    for i in range(n):
+        if n1>=3:
+            n1 = n1 - 5
+            three  += 1
+            if n1 == 0:
+                three = three * 5
+                for i in range(three):
+                    strg += "3"
+                print(int(strg))
+                return
+            if n1%3 == 0:
+                for i in range(n1):
+                    strg += "5"
+                three = three*5
+                for i in range(three):
+                    strg += "3"
+                print(int(strg))
+                return
+            if n1 < 3:
+                print(-1)
+                return                                
+
+
+
+if __name__ == '__main__':
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        n = int(input().strip())
+
+        decentNumber(n)
