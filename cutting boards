@@ -1,0 +1,57 @@
+# Hackerrank-solutions#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the boardCutting function below.
+def boardCutting(cost_y, cost_x):
+    total = 0
+    sgmnt_x = 1
+    sgmnt_y = 1
+    cost_y = sorted(cost_y,reverse = True)
+    cost_x = sorted(cost_x,reverse = True)
+    c = 0
+    for i in range(m-1):
+        for j in range(c,n-1):
+            if cost_y[i] >= cost_x[c] and sgmnt_y<m:
+                total += sgmnt_x * cost_y[i]
+                sgmnt_y += 1
+                if i < m-2:
+                    break           
+            if sgmnt_x < n:
+                if i == m-2 or cost_x[c] > cost_y[i]:
+                    total += sgmnt_y*cost_x[c]
+                    c += 1
+                    sgmnt_x += 1
+            if sgmnt_x == n and sgmnt_y <m:
+                c = 0
+                total += sgmnt_x * cost_y[i]
+                break                          
+
+    d = (total) % (10**9 + 7)            
+    return d                   
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        mn = input().split()
+
+        m = int(mn[0])
+
+        n = int(mn[1])
+
+        cost_y = list(map(int, input().rstrip().split()))
+
+        cost_x = list(map(int, input().rstrip().split()))
+
+        result = boardCutting(cost_y, cost_x)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
